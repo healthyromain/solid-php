@@ -3,6 +3,7 @@
 require_once 'MusicReader.php';
 require_once 'Mp3.php';
 require_once 'Ogg.php';
+require_once 'InvalidFileException.php';
 
 function it($m,$p){
     echo"\033[3",$p?'2m✔︎':'1m✘'.register_shutdown_function(function(){die(1);})," $m\033[0m\n";
