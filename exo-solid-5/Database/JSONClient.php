@@ -6,8 +6,8 @@ class JSONClient implements DatabaseInterface
 {
     public function fetchAll() : array
     {
-        $fileContent = file_get_contents('../data/users.json');
+        $fileContent = file_get_contents('./data/users.json');
 
-        return json_decode($fileContent);
+        return json_decode($fileContent, true);
     }
 }
