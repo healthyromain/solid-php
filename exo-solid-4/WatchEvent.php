@@ -1,6 +1,8 @@
 <?php
 
-class WatchEvent implements EventInterface
+require_once 'ActionableEventInterface.php';
+
+class WatchEvent implements ActionableEventInterface
 {
     public function name() : string
     {
@@ -10,7 +12,7 @@ class WatchEvent implements EventInterface
     public function fields() : array
     {
         return [
-            'name' => $this->name,
+            'name' => $this->name(),
             'priority' => 100,
         ];
     }

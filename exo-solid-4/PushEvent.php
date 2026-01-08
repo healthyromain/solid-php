@@ -1,5 +1,7 @@
 <?php
 
+require_once 'EventInterface.php';
+
 class PushEvent implements EventInterface
 {
     public function name() : string
@@ -10,7 +12,7 @@ class PushEvent implements EventInterface
     public function fields() : array
     {
         return [
-            'name' => $this->name,
+            'name' => $this->name(),
             'priority' => 999,
         ];
     }
