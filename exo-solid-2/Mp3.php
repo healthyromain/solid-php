@@ -1,16 +1,16 @@
 <?php
 
-class Mp3
-{
-    private $filename;
+require_once 'Music.php';
 
-    public function __construct($filename)
+class Mp3 extends Music
+{
+    public function supports(string $filename): bool
     {
-        $this->filename = $filename;
+        return $this->getExtension($filename) === 'mp3';
     }
 
-    public function listen()
+    public function listen(string $filename)
     {
-        return 'Lecture du fichier Mp3 '. $this->filename;
+        return 'Lecture du fichier Mp3 ' . $filename;
     }
 }

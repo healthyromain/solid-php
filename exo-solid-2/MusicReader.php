@@ -1,32 +1,28 @@
 <?php
 
-// Si on doit supporter un nouveau type de format, on doit modifier cette classe :(
+require_once 'Music.php';
 require_once 'Mp3.php';
 require_once 'Ogg.php';
 
 class MusicReader
 {
     private $filename;
+    private $players;
 
-    public function __construct($filename)
+    public function __construct($filename, array $players = [])
     {
         $this->filename = $filename;
+        $this->players = !empty($players) ? $players : [new Mp3(), new Ogg()];
     }
 
     public function listen()
     {
-        $extension = pathinfo($this->filename, PATHINFO_EXTENSION);
-        switch ($extension) {
-            case 'mp3':
-                $mp3 = new Mp3($this->filename);
-                return $mp3->listen();
-                break;
-            case 'ogg':
-                $ogg = new Ogg($this->filename);
-                return $ogg->listen();
-                break;
-            default:
-                throw new \Exception('Aucun lecteur trouvé pour cette musique');
+        foreach ($this->players as $player) {
+            if ($player->supports($this->filename)) {
+                return $player->listen($this->filename);
+            }
         }
+
+        throw new \Exception('Aucun lecteur trouvé pour cette musique');
     }
 }

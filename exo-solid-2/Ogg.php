@@ -1,16 +1,16 @@
 <?php
 
-class Ogg
-{
-    private $filename;
+require_once 'Music.php';
 
-    public function __construct($filename)
+class Ogg extends Music
+{
+    public function supports(string $filename): bool
     {
-        $this->filename = $filename;
+        return $this->getExtension($filename) === 'ogg';
     }
 
-    public function listen()
+    public function listen(string $filename)
     {
-        return 'Lecture du fichier Ogg '. $this->filename;
+        return 'Lecture du fichier Ogg ' . $filename;
     }
 }
